@@ -1,0 +1,564 @@
+/* 雪鸮容器 */
+.owl-section {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 雪鸮整体容器 */
+.character-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px;
+  width: 100%;
+  perspective: 1200px;
+  background-color: rgba(0, 0, 0, 0) !important;
+
+}
+
+/* 雪鸮主体 */
+.character {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+  transform-style: preserve-3d;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+/* 身体/头部 - 圆形白色基础 */
+.character-body {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  background: #ffffff;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+/* 雪鸮羽毛纹理 */
+.feathers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f8f6f2 60%, #efe9e1 100%);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* 雪鸮斑点纹理 */
+.feather-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(240, 240, 250, 0.9) 0%, rgba(240, 240, 250, 0) 20%),
+    radial-gradient(circle at 70% 35%, rgba(240, 240, 250, 0.9) 0%, rgba(240, 240, 250, 0) 20%),
+    radial-gradient(circle at 40% 60%, rgba(240, 240, 250, 0.9) 0%, rgba(240, 240, 250, 0) 20%),
+    radial-gradient(circle at 80% 60%, rgba(240, 240, 250, 0.9) 0%, rgba(240, 240, 250, 0) 20%);
+  z-index: 3;
+}
+
+/* 脸部容器 */
+.character-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+
+/* 眼睛容器 */
+.character-eyes {
+  display: flex;
+  justify-content: space-between;
+  width: 160px;
+  margin-top: -10px;
+  position: relative;
+  z-index: 5;
+}
+
+/* 眼睛 - 蓝色大眼睛 */
+.character-eye {
+  width: 68px;
+  height: 68px;
+  background: #fff;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 3px solid #f0f0f0;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+/* 眼睛外轮廓 */
+.eye-outline {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 3px solid #f0f0f0;
+  opacity: 0.5;
+}
+
+/* 眼睛虹膜 */
+.eye-iris {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  background: radial-gradient(circle at 40% 40%, #91d0ff 0%, #2196F3 70%, #0d47a1 100%);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;
+}
+
+/* 眼睛瞳孔 */
+.eye-pupil {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: #000;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+/* 眼睛高光 */
+.eye-highlight {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  top: 30%;
+  left: 25%;
+  z-index: 6;
+}
+
+/* 眼睛第二高光 */
+.eye-highlight-2 {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  bottom: 30%;
+  right: 25%;
+  z-index: 6;
+}
+
+/* 雪鸮眼睑/眨眼动画 */
+.eye-lid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #fafafa;
+  z-index: 7;
+  transition: height 0.1s ease;
+  border-bottom: 2px solid #eee;
+  border-radius: 50% 50% 0 0;
+}
+
+.character-eye.blink .eye-lid {
+  height: 100%;
+  animation: blink-animation 0.2s forwards;
+}
+
+@keyframes blink-animation {
+  0% { height: 0; }
+  50% { height: 100%; }
+  100% { height: 0; }
+}
+
+/* 眉毛 */
+.character-eyebrows {
+  position: absolute;
+  top: 55px;
+  width: 170px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 6;
+}
+
+.character-eyebrow {
+  width: 40px;
+  height: 8px;
+  background: rgba(240, 240, 240, 0.8);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+/* 嘴巴/喙 */
+.character-mouth {
+  width: 12px;
+  height: 8px;
+  background: #212121;
+  border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+  margin-top: 25px;
+  position: relative;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+/* 翅膀 */
+.wings {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.wing {
+  position: absolute;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f6f2 60%, #efe9e1 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s ease;
+}
+
+.wing.left {
+  width: 80px;
+  height: 120px;
+  top: 50%;
+  left: -25px;
+  transform: translateY(-50%) rotate(10deg);
+  transform-origin: right center;
+  z-index: 2;
+}
+
+.wing.right {
+  width: 80px;
+  height: 120px;
+  top: 50%;
+  right: -25px;
+  transform: translateY(-50%) rotate(-10deg);
+  transform-origin: left center;
+  z-index: 2;
+}
+
+/* 脚爪 */
+.feet {
+  position: absolute;
+  bottom: -15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.foot {
+  width: 15px;
+  height: 20px;
+  background: #FFA000;
+  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+  margin: 0 15px;
+  position: relative;
+}
+
+.foot::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: #FF8F00;
+  border-radius: 5px;
+}
+
+/* 情绪状态 - 开心 */
+.character.happy .eye-pupil {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.character.happy .character-mouth {
+  width: 16px;
+  height: 10px;
+  border-radius: 40% 40% 50% 50% / 30% 30% 70% 70%;
+}
+
+.character.happy .wing.left {
+  transform: translateY(-50%) rotate(20deg);
+}
+
+.character.happy .wing.right {
+  transform: translateY(-50%) rotate(-20deg);
+}
+
+/* 情绪状态 - 悲伤 */
+.character.sad .eye-pupil {
+  transform: translate(-50%, -40%) scale(1);
+}
+
+.character.sad .character-mouth {
+  transform: scaleX(1.2) scaleY(0.6) rotate(180deg);
+  border-radius: 40% 40% 50% 50% / 40% 40% 60% 60%;
+}
+
+.character.sad .wing.left {
+  transform: translateY(-40%) rotate(0deg);
+}
+
+.character.sad .wing.right {
+  transform: translateY(-40%) rotate(0deg);
+}
+
+.character.sad .character-eyebrow {
+  opacity: 0.7;
+  transform: rotate(-15deg) translateY(3px);
+}
+
+.character.sad .character-eyebrow.right {
+  transform: rotate(15deg) translateY(3px);
+}
+
+/* 情绪状态 - 无聊/生气 */
+.character.boring .eye-pupil {
+  height: 14px;
+  border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+}
+
+.character.boring .character-mouth {
+  transform: scaleX(1.5) scaleY(0.5);
+  width: 16px;
+  height: 5px;
+}
+
+.character.boring .character-eyebrow {
+  opacity: 0.9;
+  transform: rotate(-20deg) translateY(0);
+}
+
+.character.boring .character-eyebrow.right {
+  transform: rotate(20deg) translateY(0);
+}
+
+.character.boring .wing.left {
+  transform: translateY(-50%) rotate(30deg);
+}
+
+.character.boring .wing.right {
+  transform: translateY(-50%) rotate(-30deg);
+}
+
+/* 情绪状态 - 中性 */
+.character.neutral .eye-pupil {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.character.neutral .character-mouth {
+  width: 12px;
+  height: 8px;
+}
+
+/* 情绪状态 - 思考 */
+.character.thinking .eye-pupil {
+  animation: thinking-eyes 3s infinite;
+}
+
+@keyframes thinking-eyes {
+  0%, 100% { transform: translate(-50%, -50%); }
+  25% { transform: translate(-60%, -50%); }
+  50% { transform: translate(-50%, -60%); }
+  75% { transform: translate(-40%, -50%); }
+}
+
+.character.thinking .character-eyebrow {
+  opacity: 0.7;
+}
+
+.character.thinking .character-eyebrow.left {
+  transform: rotate(-15deg) translateY(-2px);
+}
+
+.character.thinking .character-eyebrow.right {
+  transform: rotate(15deg) translateY(-2px);
+}
+
+.character.thinking .character-mouth {
+  width: 10px;
+  height: 6px;
+  transform: translateY(3px);
+}
+
+.character.thinking .wing.left {
+  animation: thinking-wing-left 3s infinite;
+}
+
+.character.thinking .wing.right {
+  animation: thinking-wing-right 3s infinite;
+}
+
+@keyframes thinking-wing-left {
+  0%, 100% { transform: translateY(-50%) rotate(10deg); }
+  50% { transform: translateY(-50%) rotate(15deg); }
+}
+
+@keyframes thinking-wing-right {
+  0%, 100% { transform: translateY(-50%) rotate(-10deg); }
+  50% { transform: translateY(-50%) rotate(-15deg); }
+}
+
+/* 思考状态指示器 */
+.thinking-indicator {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #4a6572;
+  font-weight: 500;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.thinking-indicator .dots {
+  display: inline-flex;
+  margin-left: 4px;
+}
+
+.thinking-indicator .dot {
+  font-size: 1.5rem;
+  line-height: 0.7;
+  animation: blink 1.5s infinite;
+}
+
+.thinking-indicator .dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.thinking-indicator .dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* 定期眨眼动画触发 */
+@keyframes blink-trigger {
+  0%, 95%, 100% { opacity: 0; }
+  97.5% { opacity: 1; }
+}
+
+.blink-controller {
+  opacity: 0;
+  animation: blink-trigger 6s infinite;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .character {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .character-body {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .character-eyes {
+    width: 140px;
+  }
+  
+  .character-eye {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .eye-iris {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .eye-pupil {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .wing {
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .character {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .character-body {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .character-eyes {
+    width: 110px;
+  }
+  
+  .character-eye {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .eye-iris {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .eye-pupil {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .wing {
+    height: 80px;
+    width: 60px;
+  }
+  
+  .foot {
+    width: 12px;
+    height: 16px;
+  }
+} 

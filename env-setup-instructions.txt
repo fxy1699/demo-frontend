@@ -1,0 +1,27 @@
+# Environment Configuration for SSL Certificate Handling
+
+To properly handle SSL certificate issues with your backend server, you need to create a `.env` file in your project root with the following variables:
+
+```
+REACT_APP_BACKEND_URL=https://172.208.104.103:8080
+REACT_APP_IGNORE_CERT_ERRORS=true
+HTTPS=true
+```
+
+## Instructions:
+
+1. Create a file named `.env` in the frontend-simple directory
+2. Copy the variables above into the file
+3. Restart your development server
+
+This will configure your React app to:
+- Use the specified HTTPS backend URL
+- Bypass certificate validation for development purposes
+- Use HTTPS for the frontend development server
+
+To make this configuration apply for both development and production:
+
+1. Create a `.env.development` file with the same variables for development
+2. Create a `.env.production` file for production settings (without REACT_APP_IGNORE_CERT_ERRORS)
+
+For production, you should properly configure SSL certificates rather than ignoring errors. 

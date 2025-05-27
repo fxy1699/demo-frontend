@@ -1,0 +1,114 @@
+{
+  "overall": {
+    "scale": 1,
+    "zIndex": 1
+  },
+  "body": {
+    "visible": true,
+    "scale": 1,
+    "x": 0,
+    "y": 0,
+    "rotation": 0
+  },
+  "wings": {
+    "visible": true,
+    "leftWing": {
+      "scale": 1.6,
+      "x": 17,
+      "y": -50,
+      "rotation": 0
+    },
+    "rightWing": {
+      "scale": 1.6,
+      "x": -20,
+      "y": -50,
+      "rotation": 0
+    }
+  },
+  "eyes": {
+    "visible": true,
+    "leftEye": {
+      "scale": 1,
+      "x": -15,
+      "y": 16,
+      "rotation": 0,
+      "pupilScale": 1.4,
+      "pupilX": 7,
+      "pupilY": -2,
+      "irisScale": 1,
+      "irisColor": "#a03131",
+      "irisX": 0,
+      "bluePupilX": 5,
+      "bluePupilY": -1,
+      "bluePupilRotation": 0,
+      "bluePupilVisible": true,
+      "bluePupilScale": 1
+    },
+    "rightEye": {
+      "scale": 1,
+      "x": 15,
+      "y": 16,
+      "rotation": 0,
+      "pupilScale": 1.4,
+      "pupilX": -7,
+      "pupilY": -2,
+      "irisScale": 1,
+      "bluePupilX": -7,
+      "bluePupilY": -1,
+      "bluePupilVisible": true,
+      "bluePupilScale": 1
+    },
+    "eyelids": {
+      "visible": true,
+      "leftEyelid": {
+        "scale": 0.95,
+        "x": 0,
+        "y": 0,
+        "rotation": 0
+      },
+      "rightEyelid": {
+        "scale": 1,
+        "x": 0,
+        "y": 0,
+        "rotation": 0
+      }
+    }
+  },
+  "eyebrows": {
+    "visible": true,
+    "leftEyebrow": {
+      "scale": 1,
+      "x": 0,
+      "y": 0,
+      "rotation": 0
+    },
+    "rightEyebrow": {
+      "scale": 1,
+      "x": 0,
+      "y": 0,
+      "rotation": 0
+    }
+  },
+  "beak": {
+    "visible": true,
+    "scale": 1,
+    "x": -17,
+    "y": -13,
+    "rotation": 0
+  },
+  "feet": {
+    "visible": true,
+    "scale": 1.7,
+    "x": -17,
+    "y": -7,
+    "rotation": 0
+  },
+  "blinkAnimation": {
+    "enabled": true,
+    "interval": {
+      "min": 3000,
+      "max": 6700
+    },
+    "duration": 230
+  }
+} 

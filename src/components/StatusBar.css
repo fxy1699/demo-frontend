@@ -1,0 +1,196 @@
+.status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: white; /* Default for dark theme */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Add shadow to make text visible on all backgrounds */
+}
+
+.status-bar.light {
+  color: black;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.status-bar.dark .wifi-icon,
+.status-bar.dark .battery-level,
+.status-bar.dark .battery:after {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.status-bar.light .wifi-icon,
+.status-bar.light .battery-level,
+.status-bar.light .battery:after {
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.3));
+}
+
+.dynamic-island {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85px;
+  height: 25px;
+  background-color: black;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dynamic-island-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-left, .status-right {
+  display: flex;
+  align-items: center;
+  z-index: 1002;
+}
+
+.status-left {
+  margin-left: 25px;
+  position: relative;
+  top: 8px;
+}
+
+.status-right {
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  top: 8px;
+}
+
+.time {
+  font-weight: 750;
+  letter-spacing: 0px;
+  font-size: 18px;
+  font-family: "Segoe UI Rounded", sans-serif;
+  margin-top: -3px;
+}
+
+.camera-indicator {
+  width: 6px;
+  height: 6px;
+  background-color: #FF9500;
+  border-radius: 50%;
+  margin-right: 45px;
+  margin-top: -5px;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 4px rgba(255, 149, 0, 0.6);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.wifi-icon {
+  margin-right: 6px;
+  font-size: 16px;
+  color: currentColor;
+}
+
+/* iOS-style WiFi icon */
+.wifi-icon.ios-style {
+  margin-right: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wifi-icon.ios-style svg {
+  font-size: 14px;
+  transform: scale(1.2);
+  opacity: 1;
+  /* Smoother edges like iOS icons */
+  filter: drop-shadow(0 0 0.5px currentColor);
+}
+
+.battery {
+  position: relative;
+  width: 28px;
+  height: 12px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 1px;
+  margin-right: -5px;
+}
+
+.battery:after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 2px;
+  height: 6px;
+  width: 2px;
+  background-color: currentColor;
+  border-radius: 0 2px 2px 0;
+}
+
+.battery-level {
+  height: 100%;
+  background-color: currentColor;
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+
+.battery.charging .battery-level {
+  background-color: #000;
+}
+
+.status-bar.light .battery.charging .battery-level {
+  background-color: #000;
+}
+
+.battery-percentage {
+  position: absolute;
+  right: -5px;
+  top: -3px;
+  font-size: 12px;
+  width: 35px;
+  text-align: center;
+  color: #FFF;
+}
+
+/* Adjust for different screen sizes */
+@media (max-width: 375px) {
+  .dynamic-island {
+    width: 100px;
+  }
+  
+  .status-left, .status-right {
+    margin: 0 5px;
+  }
+  
+  .battery-percentage {
+    display: none;
+  }
+} 

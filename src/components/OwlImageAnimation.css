@@ -1,0 +1,505 @@
+/* 定义CSS变量 */
+:root {
+  /* 眼睛相关 */
+  --eyes-width: 200px;
+  --eyes-top: 36%;
+  --eye-size: 100px;
+  
+  /* 眼睛内部元素 */
+  --iris-size: 90%;
+  --pupil-size: 60%;
+  --big-highlight-size: 50%;
+  --small-highlight-size: 30%;
+  
+  /* 眉毛相关 */
+  --eyebrows-top: 26%;
+  --eyebrow-width: 65px;
+  --eyebrow-height: 24px;
+  
+  /* 鼻子相关 */
+  --nose-top: 52%;
+  --nose-width: 30px;
+  --nose-height: 25px;
+  
+  /* 翅膀相关 */
+  --wing-width: 110px;
+  --wing-height: 150px;
+  --wing-offset: 5px;
+  
+  /* 爪子相关 */
+  --feet-width: 70px;
+  --feet-height: 35px;
+  --feet-bottom: 5%;
+  
+  /* 尾巴相关 */
+  --tail-width: 70px;
+  --tail-height: 40px;
+  --tail-bottom: 15%;
+  
+  /* 角色整体 */
+  --character-size: 320px;
+}
+
+/* 猫头鹰图像动画样式 */
+.owl-section {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 猫头鹰整体容器 */
+.character-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px;
+  width: 100%;
+  perspective: 1200px;
+  background-color: rgba(0, 0, 0, 0) !important;
+
+}
+
+/* 猫头鹰主体 */
+.character {
+  position: relative;
+  width: var(--character-size);
+  height: var(--character-size);
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+  transform-style: preserve-3d;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+/* 基础部分 - 身体 */
+.owl-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('./bobo-parts/_0008_身体.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* 翅膀 */
+.owl-wing {
+  position: absolute;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.5s ease;
+}
+
+.owl-wing.left {
+  width: var(--wing-width);
+  height: var(--wing-height);
+  top: 50%;
+  left: var(--wing-offset);
+  background-image: url('./bobo-parts/_0005_左翅膀.png');
+  transform: translateY(-50%) rotate(0deg);
+  transform-origin: right center;
+  z-index: 2;
+}
+
+.owl-wing.right {
+  width: var(--wing-width);
+  height: var(--wing-height);
+  top: 50%;
+  right: var(--wing-offset);
+  background-image: url('./bobo-parts/_0006_右翅膀.png');
+  transform: translateY(-50%) rotate(0deg);
+  transform-origin: left center;
+  z-index: 2;
+}
+
+/* 眼睛容器 */
+.owl-eyes {
+  position: absolute;
+  top: var(--eyes-top);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--eyes-width);
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+/* 眼睛基础 */
+.owl-eye {
+  position: relative;
+  width: var(--eye-size);
+  height: var(--eye-size);
+}
+
+/* 眼睛各部分 */
+.eye-white {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 3;
+}
+
+.eye-white.left {
+  background-image: url('./bobo-parts/_0003_左眼.png');
+}
+
+.eye-white.right {
+  background-image: url('./bobo-parts/_0001_右眼.png');
+}
+
+.eye-iris {
+  position: absolute;
+  width: var(--iris-size);
+  height: var(--iris-size);
+  top: calc((100% - var(--iris-size)) / 2);
+  left: calc((100% - var(--iris-size)) / 2);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 4;
+  transition: transform 0.3s ease;
+}
+
+.eye-iris.left {
+  /* 移除旧的图片引用 */
+}
+
+.eye-iris.right {
+  /* 移除旧的图片引用 */
+}
+
+.eye-pupil {
+  position: absolute;
+  width: var(--pupil-size);
+  height: var(--pupil-size);
+  top: calc((100% - var(--pupil-size)) / 2);
+  left: calc((100% - var(--pupil-size)) / 2);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 5;
+  transition: transform 0.3s ease;
+}
+
+.eye-pupil.left {
+  /* 移除旧的图片引用 */
+}
+
+.eye-pupil.right {
+  /* 移除旧的图片引用 */
+}
+
+/* 眼睛高光 */
+.eye-highlight {
+  position: absolute;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 6;
+}
+
+
+.eye-highlight.small.left {
+  width: var(--small-highlight-size);
+  height: var(--small-highlight-size);
+  bottom: calc((100% - var(--small-highlight-size)) / 4);
+  right: calc((100% - var(--small-highlight-size)) / 4);
+  /* 移除旧的图片引用 */
+}
+
+.eye-highlight.small.right {
+  width: var(--small-highlight-size);
+  height: var(--small-highlight-size);
+  bottom: calc((100% - var(--small-highlight-size)) / 4);
+  right: calc((100% - var(--small-highlight-size)) / 4);
+  /* 移除旧的图片引用 */
+}
+
+.eye-highlight.blur.left {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  /* 移除旧的图片引用 */
+  opacity: 0.6;
+}
+
+.eye-highlight.blur.right {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  /* 移除旧的图片引用 */
+  opacity: 0.6;
+}
+
+/* 眼睑/眨眼效果 */
+.eye-lid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0; /* 初始状态高度为0 */
+  background-color: #fefefe; /* 使用纯色代替图片 */
+  border-bottom: 2px solid #e8e8e8;
+  border-radius: 40% 40% 0 0; /* 上半部分圆角，下部直线 - 调整为完全对称 */
+  z-index: 7;
+  transform-origin: center top;
+  transition: height 0.05s ease-out; /* 稍微加快过渡效果 */
+  overflow: hidden;
+  will-change: height; /* 优化动画性能 */
+}
+
+/* 左右眼皮统一样式 */
+.eye-lid.left, .eye-lid.right {
+  background-image: none;
+  border-radius: 40% 40% 0 0; /* 完全对称的圆角 */
+  top: 0;
+  left: 0;
+  transform-origin: center top;
+}
+
+/* 给眼皮添加更自然的阴影效果 */
+.eye-lid:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(245,245,245,0.4) 100%);
+  box-shadow: inset 0 -2px 3px rgba(0,0,0,0.05);
+  border-radius: inherit; /* 继承父元素的圆角 */
+}
+
+/* 眨眼动画 - 从上往下覆盖 */
+@keyframes blink-down {
+  0% { height: 0; }
+  42% { height: 100%; } /* 更自然的动画节奏 */
+  100% { height: 0; }
+}
+
+/* 当父元素有blink类时激活动画 */
+.owl-eye.blink .eye-lid {
+  animation-name: blink-down;
+  animation-duration: 180ms; /* 固定为较快的眨眼速度 */
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+/* 移除旧的动画定义 */
+@keyframes blink {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* 移除旧的不必要的样式 */
+.eye-lid.active {
+  height: 100%;
+}
+
+/* 移除旧的动画定义 */
+@keyframes blink-animation {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* 眉毛 */
+.owl-eyebrows {
+  position: absolute;
+  top: var(--eyebrows-top);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--eyes-width);
+  display: flex;
+  justify-content: space-between;
+  z-index: 8;
+}
+
+.owl-eyebrow {
+  width: var(--eyebrow-width);
+  height: var(--eyebrow-height);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.owl-eyebrow.left {
+  /* 移除旧的图片引用 */
+  transform-origin: left center;
+}
+
+.owl-eyebrow.right {
+  /* 移除旧的图片引用 */
+  transform-origin: right center;
+}
+
+/* 鼻子/喙 */
+.owl-nose {
+  position: absolute;
+  width: var(--nose-width);
+  height: var(--nose-height);
+  top: var(--nose-top);
+  left: 50%;
+  transform: translateX(-50%);
+  background-image: url('./bobo-parts/_0004_嘴.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 9;
+  transition: all 0.3s ease;
+}
+
+/* 爪子 */
+.owl-feet {
+  position: absolute;
+  bottom: var(--feet-bottom);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--feet-width);
+  height: var(--feet-height);
+  /* 移除旧的图片引用 */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* 情绪状态 - 开心 */
+.character.happy .owl-wing.left {
+  transform: translateY(-50%) rotate(15deg);
+}
+
+.character.happy .owl-wing.right {
+  transform: translateY(-50%) rotate(-15deg);
+}
+
+/* 原来的眼睛样式，改为通过JS控制
+.character.happy .eye-pupil {
+  transform: scale(1.2);
+}
+*/
+
+.character.happy .owl-nose {
+  transform: translateX(-50%) scale(1.1);
+}
+
+/* 情绪状态 - 悲伤 */
+.character.sad .owl-eyebrow {
+  opacity: 1;
+}
+
+.character.sad .owl-eyebrow.left {
+  transform: rotate(-15deg) translateY(3px);
+}
+
+.character.sad .owl-eyebrow.right {
+  transform: rotate(15deg) translateY(3px);
+}
+
+/* 原来的眼睛样式，改为通过JS控制
+.character.sad .eye-pupil {
+  transform: translateY(2px);
+}
+*/
+
+.character.sad .owl-wing.left {
+  transform: translateY(-40%) rotate(-5deg);
+}
+
+.character.sad .owl-wing.right {
+  transform: translateY(-40%) rotate(5deg);
+}
+
+.character.sad .owl-nose {
+  transform: translateX(-50%) scale(0.9);
+}
+
+/* 情绪状态 - 生气/无聊 */
+.character.boring .owl-eyebrow {
+  opacity: 1;
+}
+
+.character.boring .owl-eyebrow.left {
+  transform: rotate(-20deg) translateY(0);
+}
+
+.character.boring .owl-eyebrow.right {
+  transform: rotate(20deg) translateY(0);
+}
+
+/* 原来的眼睛样式，改为通过JS控制
+.character.boring .eye-pupil {
+  transform: scaleY(0.8);
+}
+*/
+
+.character.boring .owl-wing.left {
+  transform: translateY(-50%) rotate(25deg);
+}
+
+.character.boring .owl-wing.right {
+  transform: translateY(-50%) rotate(-25deg);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  :root {
+    --character-size: 280px;
+    --eyes-width: 180px;
+    --eye-size: 80px;
+    --wing-width: 90px;
+    --wing-height: 130px;
+    --nose-width: 25px;
+    --nose-height: 20px;
+    --feet-width: 60px;
+    --feet-height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --character-size: 240px;
+    --eyes-width: 160px;
+    --eye-size: 65px;
+    --wing-width: 75px;
+    --wing-height: 110px;
+    --nose-width: 22px;
+    --nose-height: 18px;
+    --feet-width: 50px;
+    --feet-height: 25px;
+  }
+}
+
+/* 尾巴 */
+.owl-tail {
+  position: absolute;
+  bottom: var(--tail-bottom);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--tail-width);
+  height: var(--tail-height);
+  background-image: url('./bobo-parts/_0007_尾巴.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+} 

@@ -1,0 +1,170 @@
+/* 猫头鹰控制面板样式 */
+.owl-control-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.control-button {
+  background-color: #4a6572;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.control-button:hover {
+  background-color: #344955;
+}
+
+.owl-controls-panel {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 0 auto 30px;
+  padding: 20px;
+  max-width: 800px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.control-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.control-actions .control-button {
+  flex: 1;
+  min-width: 100px;
+  margin: 0 5px;
+}
+
+.control-actions .save {
+  background-color: #4caf50;
+}
+
+.control-actions .save:hover {
+  background-color: #388e3c;
+}
+
+.control-actions .load {
+  background-color: #2196f3;
+}
+
+.control-actions .load:hover {
+  background-color: #1976d2;
+}
+
+.control-actions .reset {
+  background-color: #f44336;
+}
+
+.control-actions .reset:hover {
+  background-color: #d32f2f;
+}
+
+.control-actions .export {
+  background-color: #ff9800;
+}
+
+.control-actions .export:hover {
+  background-color: #f57c00;
+}
+
+.control-group {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.control-group h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #4a6572;
+  font-size: 16px;
+}
+
+.control-item {
+  margin-bottom: 10px;
+}
+
+.control-item label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.control-item input[type="range"] {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  background: #e0e0e0;
+  outline: none;
+  border-radius: 4px;
+}
+
+.control-item input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #4a6572;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.control-item input[type="range"]::-webkit-slider-thumb:hover {
+  background: #344955;
+}
+
+.control-item input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #4a6572;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.control-item input[type="range"]::-moz-range-thumb:hover {
+  background: #344955;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .owl-controls-panel {
+    padding: 15px;
+    max-height: 400px;
+  }
+  
+  .control-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .control-actions .control-button {
+    margin: 5px;
+    flex-basis: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .owl-controls-panel {
+    padding: 10px;
+    max-height: 350px;
+  }
+  
+  .control-actions .control-button {
+    flex-basis: 100%;
+    margin: 5px 0;
+  }
+} 

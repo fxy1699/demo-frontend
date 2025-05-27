@@ -1,0 +1,1809 @@
+/* 全局样式 */
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4ecfb 100%);
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 25px 0;
+  background: linear-gradient(135deg, #4a6572 0%, #364f5e 100%);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.header h1 {
+  position: relative;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header p {
+  position: relative;
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+.upload-section, .owl-section, .result-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.preview {
+  margin-top: 10px;
+}
+
+.preview img {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.error {
+  color: #e53935;
+  margin-top: 5px;
+}
+
+/* 表单样式 */
+.form-group {
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #4a6572;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #344955;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* 情绪结果样式 */
+.emotion-result {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 猫头鹰容器 */
+.owl-container {
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  transform: translateY(0) translateX(0);
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.owl {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.owl-face {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background: none !important;
+  border-radius: 50%;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.eyes {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  top: 40px;
+}
+
+.eye {
+  width: 40px;
+  height: 40px;
+  background: none !important;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.pupil {
+  width: 20px;
+  height: 20px;
+  background-color: #212121;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.beak {
+  position: absolute;
+  width: 30px;
+  height: 15px;
+  background-color: #ffb74d;
+  border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+  bottom: 35px;
+  left: 60px;
+  transition: all 0.3s ease;
+}
+
+.body {
+  position: relative;
+  width: 120px;
+  height: 100px;
+  background: none !important;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  margin: -30px auto 0;
+  z-index: 1;
+}
+
+.wing {
+  position: absolute;
+  width: 40px;
+  height: 80px;
+  background: none !important;
+  border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+  top: 10px;
+  transition: all 0.3s ease;
+}
+
+.left-wing {
+  left: -10px;
+  transform: rotate(-10deg);
+  transform-origin: top right;
+}
+
+.right-wing {
+  right: -10px;
+  transform: rotate(10deg);
+  transform-origin: top left;
+}
+
+.feet {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  bottom: -15px;
+}
+
+.foot {
+  width: 15px;
+  height: 20px;
+  background-color: #ffb74d;
+  border-radius: 0 0 5px 5px;
+  transition: all 0.3s ease;
+}
+
+/* 情绪样式类 */
+/* 开心 */
+.happy .eye {
+  height: 35px;
+  transform: scale(1.1);
+}
+
+.happy .pupil {
+  transform: scale(0.8);
+}
+
+.happy .beak {
+  transform: scaleY(1.2) translateY(-2px);
+  border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+}
+
+.happy .left-wing, .happy .right-wing {
+  animation: flap 0.8s infinite alternate;
+}
+
+@keyframes flap {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
+}
+
+/* 生气 */
+.angry .eye {
+  transform: scaleY(0.7);
+}
+
+.angry .pupil {
+  transform: scale(1.2);
+}
+
+.angry .beak {
+  transform: scaleY(0.8) translateY(2px) rotate(180deg);
+  background-color: #e65100;
+}
+
+.angry .foot {
+  animation: stomp 0.6s infinite alternate;
+}
+
+@keyframes stomp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+/* 悲伤 */
+.sad .owl-face {
+  transform: translateY(10px);
+}
+
+.sad .eye {
+  transform: scaleY(0.8);
+}
+
+.sad .pupil {
+  transform: translateY(5px);
+}
+
+.sad .beak {
+  transform: scaleY(0.8) rotate(180deg);
+}
+
+.sad .wing {
+  transform: translateY(5px) rotate(0deg);
+}
+
+/* 惊讶 */
+.surprised .eye {
+  transform: scale(1.2);
+}
+
+.surprised .pupil {
+  transform: scale(0.7);
+}
+
+.surprised .beak {
+  transform: scaleY(1.5) scaleX(1.2);
+}
+
+.surprised .body {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+/* 平静 */
+.calm .eye {
+  height: 35px;
+}
+
+.calm .pupil {
+  transform: scale(0.9);
+}
+
+.calm .owl-face {
+  animation: nod 2s infinite alternate;
+}
+
+@keyframes nod {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .owl {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  .owl {
+    transform: scale(0.7);
+  }
+}
+
+/* 猫头鹰部分美化 */
+.owl-section {
+  margin-bottom: 30px;
+  padding: 30px;
+  border-radius: 25px;
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.owl-section:hover {
+  transform: none;
+  box-shadow: none !important;
+}
+
+.owl-section::before {
+  display: none;
+}
+
+.upload-form {
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: rgba(244, 247, 252, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e8eef7;
+}
+
+.upload-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tab-button {
+  flex: 1;
+  padding: 12px 0;
+  background-color: #edf2f7;
+  color: #4a5568;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.tab-button:hover::before {
+  transform: translateX(0);
+}
+
+.tab-button.active {
+  background: linear-gradient(135deg, #4a6572 0%, #364f5e 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.text-input-container {
+  margin-bottom: 20px;
+}
+
+.text-input {
+  width: 100%;
+  height: 150px;
+  padding: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  resize: none;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: #4a6572;
+  box-shadow: 0 0 0 2px rgba(74, 101, 114, 0.2);
+}
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120px;
+  border: 2px dashed #cbd5e0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #4a5568;
+  background-color: #f7fafc;
+  transition: all 0.2s ease;
+}
+
+.file-label:hover {
+  border-color: #4a6572;
+  background-color: #edf2f7;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #4a6572 0%, #364f5e 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  margin-left: 0;
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.4s ease;
+}
+
+.submit-button:hover {
+  background: linear-gradient(135deg, #364f5e 0%, #293c48 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button:hover::before {
+  left: 100%;
+}
+
+/* 主应用容器 */
+.App {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  width: 100%;
+  height: calc(100% - 44px); /* Adjust height for status bar */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  background-color: transparent;
+}
+
+/* 自定义雪鸮按钮 */
+.owl-customize-hint {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.customize-owl-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.customize-owl-button:hover {
+  background-color: #e0e0e0;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 模式切换区域样式 */
+.mode-toggles {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.toggle-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+.toggle-button.active {
+  background-color: #2e5e9e;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-button:hover {
+  background-color: #3a80d2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 连接错误提示 */
+.connection-error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  text-align: center;
+  padding: 16px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.connection-error .start-backend-button {
+  background-color: #b91c1c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.connection-error .start-backend-button:hover {
+  background-color: #991b1b;
+}
+
+/* Main content area with fixed height constraints */
+.main-content {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+
+.chatbox-column {
+  flex: 1;
+  max-width: 50%;
+  height: 100%;
+}
+
+.owl-column {
+  flex: 1;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+  position: relative;
+  border-radius: 100px;
+  overflow: hidden;
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Remove redundant settings-icon style */
+.settings-icon {
+  display: none;
+}
+
+/* Add Font Awesome support */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .chatbox-column,
+  .owl-column {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .chatbox-column {
+    height: 60vh;
+  }
+  
+  .owl-column {
+    height: 40vh;
+  }
+}
+
+/* 删除旧的测试模式切换按钮样式，已被上面的新样式替代 */
+.test-mode-toggle {
+  display: none;
+}
+
+/* 视线跟踪提示 */
+.gaze-tracking-notice {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 15px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 10px auto;
+  max-width: 80%;
+  font-size: 14px;
+  animation: fadeInOut 5s forwards;
+  position: relative;
+  z-index: 1000;
+}
+
+.gaze-tracking-notice p {
+  margin: 0;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* 确保 WebGazer 的视频预览隐藏在背景中 */
+#webgazerVideoContainer {
+  opacity: 0.8 !important;
+  transform: scale(1) !important;
+  transform-origin: center !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9999 !important;
+  border: 2px solid rgba(255, 255, 255, 0.7) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+  transition: opacity 0.3s ease !important;
+  background-color: #000 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#webgazerVideoContainer:hover {
+  opacity: 0.9 !important;
+}
+
+/* When calibrating, make the video container more visible */
+.calibrating #webgazerVideoContainer {
+  opacity: 0.9 !important;
+  transform: scale(1) !important;
+  border: 2px solid rgba(255, 255, 255, 0.7) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Owl bottom controls */
+.owl-bottom-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+}
+
+.eye-tracking-button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  max-width: 250px;
+  margin: 0;
+}
+
+.eye-tracking-button:hover:not(:disabled) {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.eye-tracking-button:disabled {
+  background-color: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Make WebGazer calibration button match our UI */
+.Webgazer-button {
+  background-color: #4f46e5 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-size: 1rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  width: 100% !important;
+  max-width: 250px !important;
+  margin: 0 !important;
+  font-family: inherit !important;
+}
+
+.Webgazer-button:hover {
+  background-color: #4338ca !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Add this to ensure the app container allows the camera to display at full height */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f1f5f9;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.app-sidebar {
+  width: 70px;
+  background-color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.chatbox-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Move the owl upward when camera is enabled to make room for the camera */
+.camera-enabled .owl-container {
+  transform: translateY(-120%) translateX(0);
+  transition: transform 0.5s ease;
+  position: relative;
+  width: 300px; /* Maintain original size */
+  margin: 0 auto;
+}
+
+/* Default position for owl (centered) when camera is disabled */
+.owl-container {
+  transition: transform 0.5s ease;
+  transform: translateY(0) translateX(0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: 0 auto;
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Make sure we have enough space in the owl column when camera is enabled */
+.camera-enabled .owl-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px; /* Add some space at the top */
+  padding-bottom: 280px; /* Make room for the camera at the bottom */
+}
+
+/* Position the camera in the bottom right of the owl column */
+.owl-column .camera-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  left: 20px;
+  width: auto;
+  height: 240px;
+  max-height: 30%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  border: 2px solid #4f46e5;
+  display: block;
+  background-color: #000;
+  animation: slide-up 0.3s ease-out;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 修改后端启动失败提示样式，定位到页面右侧 */
+.manual-start-instructions {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  width: 300px;
+  max-width: 25%;
+  z-index: 950;
+  border-left: 4px solid #4f46e5;
+  animation: slide-in-right 0.5s ease-out;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translate(100%, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, -50%);
+    opacity: 1;
+  }
+}
+
+.instruction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 8px;
+}
+
+.instruction-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #4f46e5;
+}
+
+.close-instruction-button {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  margin: 0;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.close-instruction-button:hover {
+  color: #4b5563;
+}
+
+.manual-start-instructions p {
+  margin: 8px 0;
+  color: #374151;
+}
+
+.manual-start-instructions code {
+  display: block;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 4px;
+  font-family: monospace;
+  overflow-x: auto;
+  user-select: all;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.manual-start-instructions code:hover {
+  background-color: #2d2d2d;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .manual-start-instructions {
+    position: fixed;
+    top: auto;
+    bottom: 80px;
+    right: 20px;
+    left: 20px;
+    width: auto;
+    max-width: none;
+    transform: none;
+    animation: slide-in-bottom 0.5s ease-out;
+  }
+  
+  @keyframes slide-in-bottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+.retry-button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover:not(:disabled) {
+  background-color: #4338ca;
+}
+
+.retry-button:disabled {
+  background-color: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Chatbox close button - iOS style */
+.chatbox-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 101;
+}
+
+.chatbox-close-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.chatbox-close-button i {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Remove the now-unused top menu icons styles */
+.top-menu-icons {
+  display: none;
+}
+
+/* Bottom controls container with proper stacking */
+.bottom-controls-container {
+  position: fixed;
+  bottom: -0px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 900;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.control-buttons-group {
+  display: flex;
+  justify-content: center;
+  padding: 8px 6px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+/* Ensure control buttons stay in place when chatbox is open */
+.chatbox-open .control-buttons-group {
+  bottom: 40px;
+  transform: translateX(-50%);
+}
+
+/* Control buttons - Make them smaller to fit iOS container */
+.control-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #e0e0e0;
+  font-size: 1rem; /* Reduced font size */
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  margin: 0 4px; /* Reduced margins */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Define animation for the chatbox sliding up */
+@keyframes slide-up {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-height: 700px) {
+  .ios-container {
+    height: 98vh;
+    width: calc((98vh * 9) / 20);
+  }
+  
+  .centered-owl-container {
+    transform: translate(-50%, -50%) scale(0.7);
+    color: rgba(0, 0, 0, 0);
+
+  }
+  
+  .chatbox-open .centered-owl-container {
+    transform: translate(-50%, -50%) scale(1);
+    color: rgba(0, 0, 0, 0);
+
+  }
+  
+  .chatbox-panel {
+    height: 250px;
+    max-height: 150px;
+    bottom: 100px;
+  }
+  
+  .control-button {
+    width: 36px;
+    height: 36px;
+    margin: 0 3px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ensure text in all areas is black for iOS style */
+.chat-message, 
+.message-sender,
+.message-text,
+.empty-chat p,
+.chatbox-header,
+.message-input,
+.error-message,
+.recognition-results,
+.user-input, 
+.ai-response,
+.input-label, 
+.response-label {
+  color: black;
+}
+
+/* Adjust font sizes for iOS style */
+.message-text {
+  font-size: 0.9rem;
+}
+
+.message-sender {
+  font-size: 0.8rem;
+}
+
+.chatbox-header h2 {
+  font-size: 1.3rem;
+}
+
+/* Control button styles */
+.control-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-color: #bdbdbd;
+}
+
+.control-button.active {
+  background-color: #4f46e5;
+  color: white;
+  border-color: #4f46e5;
+}
+
+.control-button.active:hover {
+  background-color: #4f46e5;
+  color: white;
+}
+
+/* Status indicators for speech recognition */
+.control-button.audio-button.listening {
+  animation: pulse 2s infinite;
+  background-color: #4f46e5;
+  color: white;
+}
+
+.control-button.audio-button.processing {
+  animation: spin 1s infinite linear;
+  background-color: #FFC107;
+  color: white;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.control-button.start-backend-button {
+  width: auto;
+  border-radius: 25px;
+  padding: 0 16px;
+  font-size: 0.9rem;
+}
+
+/* Never hide bottom controls when chatbox is open */
+.chatbox-open .bottom-controls-container {
+  opacity: 1;
+  bottom: -20px; /* Ensure it stays at the same position */
+  transform: translateX(-50%); /* Maintain the horizontal centering */
+}
+
+/* When calibrating, ensure the bottom controls stay visible but non-interactive */
+.main-content.calibrating .bottom-controls-container {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/* Hidden class for controls */
+.bottom-controls-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* iOS style container */
+.ios-container {
+  position: fixed;
+  height: 95vh;
+  width: calc((95vh * 9) / 20); /* 20:9 vertical aspect ratio */
+  background-color: transparent;
+  border: 5px solid rgba(0, 0, 0, 0.8);
+  border-radius: 50px;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 50px 0 0 0; /* Add top padding for the status bar */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Remove the semi-transparent overlay */
+.ios-container::before {
+  display: none;
+}
+
+/* Ensure content stays above the background */
+.App {
+  position: relative;
+  z-index: 1;
+  background-color: transparent !important;
+}
+
+/* Update the centered owl container styles */
+.centered-owl-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, top 0.3s ease;
+  z-index: 80;
+  transform-origin: center;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  pointer-events: none;
+}
+
+.chatbox-open .centered-owl-container,
+.show-camera .centered-owl-container,
+.show-recognition-results .centered-owl-container {
+  top: 33%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+}
+
+.owl-container {
+  transition: transform 0.5s ease;
+  transform: translateY(0) translateX(0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: 0 auto;
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Remove hover effects from owl section */
+.owl-section {
+  margin-bottom: 30px;
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.owl-section:hover {
+  transform: none;
+  box-shadow: none !important;
+}
+
+.owl-section::before {
+  display: none;
+}
+
+/* Ensure owl column is also transparent */
+.owl-column {
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Chatbox panel - Updated for positioning between owl and bottom icons */
+.chatbox-panel {
+  position: absolute;
+  bottom: 120px; /* Position above the control buttons */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 95%;
+  height: 200px; /* Slightly reduced height to fit in iOS container */
+  max-height: 200px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  animation: slide-up 0.3s forwards;
+  color: black; /* iOS style text color */
+}
+
+/* Speech status indicator styles - iOS style */
+.speech-status-indicator {
+  position: absolute;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  z-index: 100;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5px;
+}
+
+/* Recognition results display - iOS style */
+.recognition-results {
+  position: absolute;
+  bottom: 145px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 75%;
+  max-width: 75%;
+  z-index: 100;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  border-left: 4px solid #4f46e5;
+  text-align: left;
+}
+
+.user-input, .ai-response {
+  margin: 5px 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: black;
+  word-break: break-word;
+  width: 100%;
+  display: block;
+}
+
+.ai-response {
+  margin-top: 8px;
+  border-top: 1px solid #0000001a;
+  padding-top: 8px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.input-label, .response-label {
+  font-weight: bold;
+  margin-right: 6px;
+  color: #4f46e5;
+}
+
+.response-label {
+  color: #4f46e5;
+}
+
+/* Control button states */
+.control-button.camera-button {
+  background-color: #F1F5F9;
+  color: #555;
+}
+
+.control-button.camera-button.active {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.control-button.camera-button.active:hover {
+  background-color: #4f46e5;
+}
+
+.control-button.camera-button:hover {
+  background-color: #E2E8F0;
+}
+
+/* Camera container styles */
+.camera-container.bottom-right {
+  position: absolute;
+  bottom: -150px;
+  right: 5%;
+  width: 90%;
+  max-width: 320px;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  border: 2px solid #4f46e5;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.camera-container.bottom-right.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Auto-capture indicator */
+.camera-status {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Status message at the bottom of camera */
+.camera-status.status-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 110;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.camera-status .status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4f46e5;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.camera-status .status-indicator.active {
+  animation: pulse-indicator 2s infinite;
+}
+
+@keyframes pulse-indicator {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.auto-capture-toast {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  z-index: 1000;
+  animation: fade-out 3s forwards;
+}
+
+@keyframes fade-out {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* Camera preview toggle button */
+.camera-preview-toggle {
+  background-color: #f0f0f0;
+  color: #555;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  margin: 0 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.camera-preview-toggle:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.camera-preview-toggle.active {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.camera-preview-toggle.active:hover {
+  background-color: #4338ca;
+}
+
+@media (max-width: 480px) {
+  .camera-preview-toggle {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+  
+  .camera-container.bottom-right {
+    width: 120px;
+    height: 90px;
+  }
+}
+
+@media (max-height: 600px) {
+  .camera-preview-toggle {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+}
+
+/* 打断按钮样式 */
+.interrupt-button {
+  margin-left: 10px;
+  padding: 2px 8px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.interrupt-button:hover {
+  background-color: #ff7875;
+}
+
+.interrupt-button i {
+  margin-right: 4px;
+}
+
+/* 可能需要调整AI响应区域的样式 */
+.ai-response {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ai-response .response-label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+/* 自动打断开关样式 */
+.auto-interrupt-toggle {
+  margin-top: 5px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 3px 6px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.auto-interrupt-toggle label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.auto-interrupt-toggle input[type="checkbox"] {
+  margin-right: 4px;
+  cursor: pointer;
+  accent-color: #4f46e5;
+}
+
+/* 调整语音状态指示器内部文本样式 */
+.speech-status {
+  color: white;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* 情感分析得分样式 */
+.sentiment-score {
+  margin-top: 5px;
+  padding: 5px 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.sentiment-label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.score-value {
+  font-weight: bold;
+}
+
+.score-value.positive {
+  color: #28a745;
+}
+
+.score-value.negative {
+  color: #dc3545;
+}
+
+.score-value.neutral {
+  color: #6c757d;
+}
+
+.owl-face,
+.body,
+.wing,
+.eye {
+  background-color: transparent !important;
+  background: transparent !important;
+  -webkit-background-color: transparent !important;
+  -moz-background-color: transparent !important;
+}
+
+/* 情绪标签的样式 */
+.emotion-tag {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+

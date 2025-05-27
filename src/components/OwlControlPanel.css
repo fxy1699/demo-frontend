@@ -1,0 +1,97 @@
+.owl-control-panel {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.panel-title {
+  text-align: center;
+  color: #344955;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  gap: 10px;
+}
+
+.owl-preview {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 0; /* 减少内边距 */
+  flex-grow: 0; /* 不要伸展 */
+  min-height: 450px; /* 保持最小高度 */
+  height: 450px; /* 设置固定高度 */
+  overflow: visible; /* 确保内容可见 */
+}
+
+.owl-preview-container {
+  position: relative;
+  width: 100%;
+  height: 450px; /* 设置固定高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 添加网格背景以便于观察定位 */
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, rgba(200, 200, 200, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(200, 200, 200, 0.1) 1px, transparent 1px);
+}
+
+/* 添加猫头鹰样式 */
+.owl-preview-container .character {
+  transform-origin: center center;
+  transform: scale(0.8); /* 缩放比例 */
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.controls-container {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  padding: 0 5px;
+  max-height: none; /* 移除最大高度限制 */
+  min-height: 200px; /* 添加最小高度确保控制区域有足够空间 */
+}
+
+/* 响应式样式调整 */
+@media (max-width: 768px) {
+  .panel-content {
+    flex-direction: column;
+  }
+  
+  .owl-preview {
+    height: 450px; /* 增加高度 */
+  }
+  
+  .owl-preview-container {
+    height: 450px; /* 与owl-preview一致 */
+  }
+}
+
+/* 分隔线样式 */
+.section-divider {
+  height: 1px;
+  background-color: #e1e4e8;
+  margin: 10px 0;
+}
+
+/* 注意：删除了重复的action-buttons样式 */ 

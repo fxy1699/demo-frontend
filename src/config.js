@@ -5,9 +5,9 @@ const getApiBaseUrl = () => {
   const useAlternateIp = localStorage.getItem('useAlternateIp') === 'true';
   
   if (process.env.NODE_ENV === 'production') {
-    // In production, use the same domain (Vercel will proxy to backend)
-    // This avoids mixed content issues since we're using the same HTTPS domain
-    return process.env.REACT_APP_BACKEND_URL || 'https://demo.skyrisai.com';
+    // In production, use relative URLs for API requests to leverage Vercel's proxy
+    // This avoids CORS issues since we're using the same domain
+    return '';  // Empty string means use the same domain
   } else {
     // In development, check if public backend is available
     try {

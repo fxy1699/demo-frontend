@@ -580,24 +580,34 @@ const OwlImageAnimation = ({
 
   // 翅膀样式
   const leftWingStyle = {
-    ...getTransformStyle(controls.wings.leftWing),
     display: controls.wings.visible ? 'block' : 'none',
-    // 应用开心状态的翅膀摆动效果
-    ...(emotionState === 'happy' && {
-      transform: `scale(${controls.wings.leftWing.scale}) 
-                 translate(${controls.wings.leftWing.x}px, ${controls.wings.leftWing.y - wingsOffset.y}px) 
-                 rotate(${controls.wings.leftWing.rotation - wingsOffset.rotation}deg)`
+    transformOrigin: `${controls.wings.leftWing.transformOriginXPercent || 100}% ${controls.wings.leftWing.transformOriginYPercent || 50}%`,
+    // 使用CSS变量传递缩放和位置参数
+    '--wing-scale': controls.wings.leftWing.scale,
+    '--wing-x': `${controls.wings.leftWing.x}px`,
+    '--wing-y': `${controls.wings.leftWing.y}px`,
+    '--wing-rotation': `${controls.wings.leftWing.rotation}deg`,
+    // 非动画状态下的变换 - 使用与动画相同的变换顺序
+    ...(emotionState !== 'happy' && emotionState !== 'sad' && {
+      transform: `translateY(-50%) rotate(${controls.wings.leftWing.rotation}deg) 
+                 translate(${controls.wings.leftWing.x}px, ${controls.wings.leftWing.y}px) 
+                 scale(${controls.wings.leftWing.scale})`
     })
   };
   
   const rightWingStyle = {
-    ...getTransformStyle(controls.wings.rightWing),
     display: controls.wings.visible ? 'block' : 'none',
-    // 应用开心状态的翅膀摆动效果
-    ...(emotionState === 'happy' && {
-      transform: `scale(${controls.wings.rightWing.scale}) 
-                 translate(${controls.wings.rightWing.x}px, ${controls.wings.rightWing.y - wingsOffset.y}px) 
-                 rotate(${controls.wings.rightWing.rotation + wingsOffset.rotation}deg)`
+    transformOrigin: `${controls.wings.rightWing.transformOriginXPercent || 0}% ${controls.wings.rightWing.transformOriginYPercent || 50}%`,
+    // 使用CSS变量传递缩放和位置参数
+    '--wing-scale': controls.wings.rightWing.scale,
+    '--wing-x': `${controls.wings.rightWing.x}px`,
+    '--wing-y': `${controls.wings.rightWing.y}px`,
+    '--wing-rotation': `${controls.wings.rightWing.rotation}deg`,
+    // 非动画状态下的变换 - 使用与动画相同的变换顺序
+    ...(emotionState !== 'happy' && emotionState !== 'sad' && {
+      transform: `translateY(-50%) rotate(${controls.wings.rightWing.rotation}deg) 
+                 translate(${controls.wings.rightWing.x}px, ${controls.wings.rightWing.y}px) 
+                 scale(${controls.wings.rightWing.scale})`
     })
   };
 

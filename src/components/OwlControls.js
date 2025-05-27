@@ -142,8 +142,16 @@ const OwlControls = ({ controls, onChange, onSave }) => {
         body: { visible: true, scale: 1, x: 0, y: 0, rotation: 0 },
         wings: { 
           visible: true, 
-          leftWing: { scale: 1, x: 0, y: 0, rotation: 0 },
-          rightWing: { scale: 1, x: 0, y: 0, rotation: 0 }
+          leftWing: { 
+            scale: 1, x: 0, y: 0, rotation: 0,
+            transformOriginX: 'right', transformOriginY: 'center',
+            transformOriginXPercent: 100, transformOriginYPercent: 50
+          },
+          rightWing: { 
+            scale: 1, x: 0, y: 0, rotation: 0,
+            transformOriginX: 'left', transformOriginY: 'center',
+            transformOriginXPercent: 0, transformOriginYPercent: 50
+          }
         },
         eyes: { 
           visible: true,
@@ -322,6 +330,10 @@ const OwlControls = ({ controls, onChange, onSave }) => {
         {renderSlider('X轴位置', 'wings', 'leftWing', -100, 100, 1, 0, 'x')}
         {renderSlider('Y轴位置', 'wings', 'leftWing', -100, 100, 1, 0, 'y')}
         {renderSlider('旋转角度', 'wings', 'leftWing', -180, 180, 1, 0, 'rotation')}
+        
+        <h5>旋转轴心</h5>
+        {renderSlider('水平轴心点 (%)', 'wings', 'leftWing', 0, 100, 1, 100, 'transformOriginXPercent')}
+        {renderSlider('垂直轴心点 (%)', 'wings', 'leftWing', 0, 100, 1, 50, 'transformOriginYPercent')}
       </div>
       
       <div className="control-subgroup">
@@ -330,6 +342,10 @@ const OwlControls = ({ controls, onChange, onSave }) => {
         {renderSlider('X轴位置', 'wings', 'rightWing', -100, 100, 1, 0, 'x')}
         {renderSlider('Y轴位置', 'wings', 'rightWing', -100, 100, 1, 0, 'y')}
         {renderSlider('旋转角度', 'wings', 'rightWing', -180, 180, 1, 0, 'rotation')}
+        
+        <h5>旋转轴心</h5>
+        {renderSlider('水平轴心点 (%)', 'wings', 'rightWing', 0, 100, 1, 0, 'transformOriginXPercent')}
+        {renderSlider('垂直轴心点 (%)', 'wings', 'rightWing', 0, 100, 1, 50, 'transformOriginYPercent')}
       </div>
     </div>
   );

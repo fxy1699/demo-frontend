@@ -62,7 +62,7 @@
   width: 100%;
   perspective: 1200px;
   background-color: rgba(0, 0, 0, 0) !important;
-
+  transform-style: preserve-3d;
 }
 
 /* 猫头鹰主体 */
@@ -99,6 +99,9 @@
   background-position: center;
   background-repeat: no-repeat;
   transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  will-change: transform;
 }
 
 .owl-wing.left {
@@ -107,8 +110,7 @@
   top: 50%;
   left: var(--wing-offset);
   background-image: url('./bobo-parts/_0005_左翅膀.png');
-  transform: translateY(-50%) rotate(0deg);
-  transform-origin: right center;
+  transform: translateY(-50%);
   z-index: 2;
 }
 
@@ -118,9 +120,55 @@
   top: 50%;
   right: var(--wing-offset);
   background-image: url('./bobo-parts/_0006_右翅膀.png');
-  transform: translateY(-50%) rotate(0deg);
-  transform-origin: left center;
+  transform: translateY(-50%);
   z-index: 2;
+}
+
+/* 3D翅膀扇动动画关键帧 - 调整以保持一致位置 */
+@keyframes happyFlap3DLeft {
+  0% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(0deg); }
+  50% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(40deg); }
+  100% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(0deg); }
+}
+
+@keyframes happyFlap3DRight {
+  0% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(0deg); }
+  50% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(-40deg); }
+  100% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(0deg); }
+}
+
+@keyframes sadFlap3DLeft {
+  0% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(0deg); }
+  50% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(20deg); }
+  100% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(0deg); }
+}
+
+@keyframes sadFlap3DRight {
+  0% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(0deg); }
+  50% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(-20deg); }
+  100% { transform: translateY(-50%) rotate(var(--wing-rotation, 0deg)) translate(var(--wing-x, 0px), var(--wing-y, 0px)) scale(var(--wing-scale, 1)) rotateY(0deg); }
+}
+
+/* 情绪状态 - 开心，设置3D动画，但不覆盖JS设置的transformOrigin */
+.character.happy .owl-wing.left {
+  animation: happyFlap3DLeft 0.5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.character.happy .owl-wing.right {
+  animation: happyFlap3DRight 0.5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+/* 情绪状态 - 悲伤，设置3D动画，但不覆盖JS设置的transformOrigin */
+.character.sad .owl-wing.left {
+  animation: sadFlap3DLeft 2s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.character.sad .owl-wing.right {
+  animation: sadFlap3DRight 2s ease-in-out infinite;
+  transform-style: preserve-3d;
 }
 
 /* 眼睛容器 */
@@ -384,20 +432,6 @@
 }
 
 /* 情绪状态 - 开心 */
-.character.happy .owl-wing.left {
-  transform: translateY(-50%) rotate(15deg);
-}
-
-.character.happy .owl-wing.right {
-  transform: translateY(-50%) rotate(-15deg);
-}
-
-/* 原来的眼睛样式，改为通过JS控制
-.character.happy .eye-pupil {
-  transform: scale(1.2);
-}
-*/
-
 .character.happy .owl-nose {
   transform: translateX(-50%) scale(1.1);
 }
@@ -413,20 +447,6 @@
 
 .character.sad .owl-eyebrow.right {
   transform: rotate(15deg) translateY(3px);
-}
-
-/* 原来的眼睛样式，改为通过JS控制
-.character.sad .eye-pupil {
-  transform: translateY(2px);
-}
-*/
-
-.character.sad .owl-wing.left {
-  transform: translateY(-40%) rotate(-5deg);
-}
-
-.character.sad .owl-wing.right {
-  transform: translateY(-40%) rotate(5deg);
 }
 
 .character.sad .owl-nose {
@@ -445,12 +465,6 @@
 .character.boring .owl-eyebrow.right {
   transform: rotate(20deg) translateY(0);
 }
-
-/* 原来的眼睛样式，改为通过JS控制
-.character.boring .eye-pupil {
-  transform: scaleY(0.8);
-}
-*/
 
 .character.boring .owl-wing.left {
   transform: translateY(-50%) rotate(25deg);

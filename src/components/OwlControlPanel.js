@@ -16,8 +16,16 @@ const OwlControlPanel = ({ controls: propControls, onSaveConfig }) => {
     body: { visible: true, scale: 1, x: 0, y: 0, rotation: 0 },
     wings: { 
       visible: true, 
-      leftWing: { scale: 1, x: 0, y: 0, rotation: 0 },
-      rightWing: { scale: 1, x: 0, y: 0, rotation: 0 }
+      leftWing: { 
+        scale: 1, x: 0, y: 0, rotation: 0,
+        transformOriginX: 'right', transformOriginY: 'center',
+        transformOriginXPercent: 100, transformOriginYPercent: 50
+      },
+      rightWing: { 
+        scale: 1, x: 0, y: 0, rotation: 0,
+        transformOriginX: 'left', transformOriginY: 'center',
+        transformOriginXPercent: 0, transformOriginYPercent: 50
+      }
     },
     eyes: { 
       visible: true,

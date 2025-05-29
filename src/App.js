@@ -75,6 +75,9 @@ function App() {
   const [showManualInstructions, setShowManualInstructions] = useState(true);
   const [speechRecognitionStatus, setSpeechRecognitionStatus] = useState('idle'); // 新增：语音识别状态
   
+  // 添加表情识别结果状态
+  const [emotionAnalysisResult, setEmotionAnalysisResult] = useState(null);
+  
   // Get stored IQ level with debug logging
   const storedIqLevel = localStorage.getItem('iqLevel');
   console.log(`[DEBUG] App.js - Initial localStorage iqLevel value: '${storedIqLevel}'`);
@@ -1339,6 +1342,96 @@ function App() {
     setShowCameraPreview(newValue);
   };
 
+  // 添加一个新函数用于捕获和分析表情
+  const captureAndAnalyzeEmotion = async () => {
+    const cameraWasEnabled = cameraEnabled;
+    
+    try {
+      setLoading(true);
+      
+      // 如果摄像头未开启，则先开启摄像头
+      if (!cameraEnabled) {
+        setCameraEnabled(true);
+        
+        // 等待摄像头初始化
+        await new Promise((resolve) => {
+          const checkCameraReady = () => {
+            if (cameraVideoRef.current && 
+                cameraVideoRef.current.srcObject && 
+                cameraVideoRef.current.readyState >= 2) {
+              resolve();
+            } else {
+              setTimeout(checkCameraReady, 100);
+            }
+          };
+          
+          setTimeout(checkCameraReady, 500); // 给一些时间让摄像头初始化
+        });
+      }
+      
+      // 确保摄像头已经准备好
+      if (!cameraVideoRef.current || !cameraVideoRef.current.srcObject) {
+        throw new Error('摄像头未准备好，请稍后再试');
+      }
+      
+      // 创建一个画布来捕获当前视频帧
+      const canvas = document.createElement('canvas');
+      canvas.width = cameraVideoRef.current.videoWidth;
+      canvas.height = cameraVideoRef.current.videoHeight;
+      const ctx = canvas.getContext('2d');
+      
+      if (!ctx) {
+        throw new Error('Unable to get canvas context');
+      }
+      
+      ctx.drawImage(cameraVideoRef.current, 0, 0, canvas.width, canvas.height);
+      
+      // 将图像转换为blob
+      const blob = await new Promise((resolve, reject) => {
+        canvas.toBlob(resolve, 'image/jpeg', 0.9);
+      });
+      
+      if (!blob) {
+        throw new Error('Failed to capture image');
+      }
+      
+      const formData = new FormData();
+      
+      // 添加图像文件
+      const imageFile = new File([blob], 'emotion-capture.jpg', { type: 'image/jpeg' });
+      formData.append('image_file', imageFile);
+      
+      // 发送请求到后端的表情识别API
+      const response = await axios.post(`${API_BASE_URL}/api/generate-emotion`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      console.log('Emotion analysis response:', response.data);
+      
+      // 更新表情识别结果状态
+      setEmotionAnalysisResult({
+        emotion: response.data.emotion,
+        confidence: Math.round(response.data.confidence)
+      });
+      
+    } catch (error) {
+      console.error('表情捕获或处理失败:', error);
+      setEmotionAnalysisResult(null);
+      alert('表情识别失败: ' + error.message);
+    } finally {
+      setLoading(false);
+      
+      // 如果之前摄像头是关闭状态，则恢复关闭
+      if (!cameraWasEnabled) {
+        setTimeout(() => {
+          setCameraEnabled(false);
+        }, 500); // 给一点延迟，让用户看到结果
+      }
+    }
+  };
+
   return (
     <PromptContext.Provider value={prompts}>
       <WebGazerContext.Provider value={webGazerValue}>
@@ -1417,6 +1510,18 @@ function App() {
                         </button>
                       </div>
                     )}
+                  </div>
+                )}
+                
+                {/* 表情识别结果显示 - 移到这里确保在按钮组上面 */}
+                {emotionAnalysisResult && (
+                  <div className="emotion-analysis-result">
+                    <div className="emotion-result-content">
+                      <span className="emotion-label">表情识别结果:</span>
+                      <span className="emotion-value">{emotionAnalysisResult.emotion}</span>
+                      <span className="confidence-label">置信度:</span>
+                      <span className="confidence-value">{emotionAnalysisResult.confidence}%</span>
+                    </div>
                   </div>
                 )}
                 
@@ -1562,6 +1667,16 @@ function App() {
                       title={audioEnabled ? "Turn Off Voice Input" : "Turn On Voice Input"}
                     >
                       <i className={`fas ${audioEnabled ? 'fa-microphone' : 'fa-microphone-slash'}`}></i>
+                    </button>
+                    
+                    {/* 添加表情识别按钮 */}
+                    <button 
+                      className="control-button emotion-button"
+                      onClick={captureAndAnalyzeEmotion}
+                      disabled={loading}
+                      title="表情识别"
+                    >
+                      <i className="fas fa-smile"></i>
                     </button>
                     
                     {/* Backend connection button (only when needed) */}

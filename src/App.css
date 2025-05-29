@@ -1806,4 +1806,67 @@ button:disabled {
   color: #333;
 }
 
+/* 表情识别结果样式 */
+.emotion-analysis-result {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+  max-width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  width: auto;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.emotion-result-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 15px;
+}
+
+.emotion-label, .confidence-label {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.emotion-value, .confidence-value {
+  font-weight: 600;
+  margin-right: 15px;
+}
+
+/* 表情按钮特定样式 */
+.emotion-button {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+}
+
+.emotion-button:hover {
+  background: linear-gradient(135deg, #ff6e4f, #feb47b);
+}
+
+.emotion-button:disabled {
+  background: linear-gradient(135deg, #aaa, #ccc);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* 添加淡入动画定义 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 

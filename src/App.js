@@ -618,8 +618,12 @@ function App() {
     const newState = !cameraEnabled;
     setCameraEnabled(newState);
     
-    // If disabling camera, ensure it's fully stopped
-    if (!newState) {
+    // 如果禁用摄像头，清除定时器
+    if (!newState && window.emotionTimerID) {
+      clearInterval(window.emotionTimerID);
+      window.emotionTimerID = null;
+      console.log('已停止表情识别定时器');
+      
       // Stop WebGazer if it's running
       if (window.webgazer) {
         try {
@@ -658,22 +662,67 @@ function App() {
     const initializeCamera = async () => {
       if (cameraEnabled && cameraVideoRef.current) {
         try {
+          // 清除可能存在的旧定时器
+          if (window.emotionTimerID) {
+            clearInterval(window.emotionTimerID);
+            window.emotionTimerID = null;
+          }
+          
+          console.log('正在初始化摄像头...');
+          
+          // 请求摄像头权限，设置更高质量
           const stream = await navigator.mediaDevices.getUserMedia({ 
             video: { 
               width: { ideal: 640 },
-              height: { ideal: 480 }
+              height: { ideal: 480 },
+              frameRate: { ideal: 30 }  // 请求更高帧率以获得流畅效果
             } 
           });
           
+          // 设置视频源
           cameraVideoRef.current.srcObject = stream;
-          await cameraVideoRef.current.play();
-          console.log('Camera initialized in App component');
+          
+          // 添加事件监听器，在视频真正可以播放时才开始截图
+          cameraVideoRef.current.oncanplay = () => {
+            console.log('视频可以播放了，摄像头完全准备就绪');
+            
+            // 确保视频是播放状态
+            cameraVideoRef.current.play().then(() => {
+              console.log('视频播放已启动，开始表情识别');
+              
+              // 先执行一次截图
+              setTimeout(() => {
+                captureAndSendEmotionFrame();
+              }, 500);
+              
+              // 设置定时器每3秒截取一张图片
+              const emotionTimer = setInterval(() => {
+                captureAndSendEmotionFrame();
+              }, 3000);
+              
+              // 保存定时器ID，以便后续清除
+              window.emotionTimerID = emotionTimer;
+            }).catch(err => {
+              console.error('无法播放视频:', err);
+            });
+            
+            // 只触发一次
+            cameraVideoRef.current.oncanplay = null;
+          };
+          
+          // 播放视频流 - 这会触发上面的oncanplay事件
+          cameraVideoRef.current.play().catch(err => {
+            console.error('初始播放视频失败:', err);
+          });
+          
+          console.log('摄像头初始化完成，等待视频准备就绪');
+          
         } catch (err) {
-          console.error('Error accessing camera:', err);
+          console.error('访问摄像头失败:', err);
           setCameraEnabled(false);
         }
       } else if (!cameraEnabled && cameraVideoRef.current?.srcObject) {
-        // Stop all tracks when camera is disabled
+        // 停止所有视频轨道
         const tracks = cameraVideoRef.current.srcObject.getTracks();
         tracks.forEach(track => track.stop());
         cameraVideoRef.current.srcObject = null;
@@ -1342,95 +1391,94 @@ function App() {
     setShowCameraPreview(newValue);
   };
 
-  // 添加一个新函数用于捕获和分析表情
-  const captureAndAnalyzeEmotion = async () => {
-    const cameraWasEnabled = cameraEnabled;
-    
+  // 新增函数：捕获并发送表情帧
+  const captureAndSendEmotionFrame = () => {
     try {
-      setLoading(true);
-      
-      // 如果摄像头未开启，则先开启摄像头
-      if (!cameraEnabled) {
-        setCameraEnabled(true);
-        
-        // 等待摄像头初始化
-        await new Promise((resolve) => {
-          const checkCameraReady = () => {
-            if (cameraVideoRef.current && 
-                cameraVideoRef.current.srcObject && 
-                cameraVideoRef.current.readyState >= 2) {
-              resolve();
-            } else {
-              setTimeout(checkCameraReady, 100);
-            }
-          };
-          
-          setTimeout(checkCameraReady, 500); // 给一些时间让摄像头初始化
-        });
+      // 检查摄像头状态
+      if (!cameraVideoRef.current || 
+          !cameraVideoRef.current.srcObject || 
+          !cameraEnabled) {
+        console.log('摄像头未准备好，无法截取图片');
+        return;
       }
       
-      // 确保摄像头已经准备好
-      if (!cameraVideoRef.current || !cameraVideoRef.current.srcObject) {
-        throw new Error('摄像头未准备好，请稍后再试');
+      // 检查视频是否已经加载并可以播放
+      if (cameraVideoRef.current.readyState < 3) { // HAVE_FUTURE_DATA = 3
+        console.log('视频尚未足够加载，等待下一次截图，当前readyState:', cameraVideoRef.current.readyState);
+        return;
       }
       
-      // 创建一个画布来捕获当前视频帧
+      // 确认视频尺寸有效
+      if (!cameraVideoRef.current.videoWidth || !cameraVideoRef.current.videoHeight) {
+        console.log('视频尺寸无效，等待下一次截图');
+        return;
+      }
+      
+      console.log('截取视频帧用于表情识别');
+      
+      // 静默截取图片，不影响用户体验
       const canvas = document.createElement('canvas');
       canvas.width = cameraVideoRef.current.videoWidth;
       canvas.height = cameraVideoRef.current.videoHeight;
       const ctx = canvas.getContext('2d');
       
       if (!ctx) {
-        throw new Error('Unable to get canvas context');
+        console.error('无法获取canvas上下文');
+        return;
       }
       
+      // 将视频帧绘制到canvas
       ctx.drawImage(cameraVideoRef.current, 0, 0, canvas.width, canvas.height);
       
-      // 将图像转换为blob
-      const blob = await new Promise((resolve, reject) => {
-        canvas.toBlob(resolve, 'image/jpeg', 0.9);
-      });
-      
-      if (!blob) {
-        throw new Error('Failed to capture image');
-      }
-      
-      const formData = new FormData();
-      
-      // 添加图像文件
-      const imageFile = new File([blob], 'emotion-capture.jpg', { type: 'image/jpeg' });
-      formData.append('image_file', imageFile);
-      
-      // 发送请求到后端的表情识别API
-      const response = await axios.post(`${API_BASE_URL}/api/generate-emotion`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      // 将canvas转换为blob
+      canvas.toBlob(async (blob) => {
+        if (!blob) {
+          console.error('无法创建图像Blob');
+          return;
         }
-      });
-      
-      console.log('Emotion analysis response:', response.data);
-      
-      // 更新表情识别结果状态
-      setEmotionAnalysisResult({
-        emotion: response.data.emotion,
-        confidence: Math.round(response.data.confidence)
-      });
+        
+        // 创建FormData对象
+        const formData = new FormData();
+        const imageFile = new File([blob], 'emotion-frame.jpg', { type: 'image/jpeg' });
+        formData.append('image_file', imageFile);
+        
+        try {
+          // 静默发送到后端进行表情识别
+          const response = await axios.post(`${API_BASE_URL}/api/generate-emotion`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          
+          // 处理返回的表情识别结果
+          console.log('表情识别结果:', response.data);
+          if (response.data && response.data.emotion) {
+            setEmotionAnalysisResult({
+              emotion: response.data.emotion,
+              confidence: Math.round(response.data.confidence || 0)
+            });
+          }
+        } catch (error) {
+          console.error('发送表情帧失败:', error);
+          // 静默失败，不影响用户体验
+        }
+      }, 'image/jpeg', 0.9);
       
     } catch (error) {
-      console.error('表情捕获或处理失败:', error);
-      setEmotionAnalysisResult(null);
-      alert('表情识别失败: ' + error.message);
-    } finally {
-      setLoading(false);
-      
-      // 如果之前摄像头是关闭状态，则恢复关闭
-      if (!cameraWasEnabled) {
-        setTimeout(() => {
-          setCameraEnabled(false);
-        }, 500); // 给一点延迟，让用户看到结果
-      }
+      console.error('截取表情帧失败:', error);
+      // 静默失败，不影响用户体验
     }
   };
+
+  // 在组件卸载时清除定时器
+  useEffect(() => {
+    return () => {
+      if (window.emotionTimerID) {
+        clearInterval(window.emotionTimerID);
+        window.emotionTimerID = null;
+      }
+    };
+  }, []);
 
   return (
     <PromptContext.Provider value={prompts}>
@@ -1669,15 +1717,7 @@ function App() {
                       <i className={`fas ${audioEnabled ? 'fa-microphone' : 'fa-microphone-slash'}`}></i>
                     </button>
                     
-                    {/* 添加表情识别按钮 */}
-                    <button 
-                      className="control-button emotion-button"
-                      onClick={captureAndAnalyzeEmotion}
-                      disabled={loading}
-                      title="表情识别"
-                    >
-                      <i className="fas fa-smile"></i>
-                    </button>
+                    {/* 删除表情识别按钮 */}
                     
                     {/* Backend connection button (only when needed) */}
                     {!backendStatus.isConnected && (
